@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <title>VUE</title>
-        <link rel="stylesheet" href="../css/bootstrap.min.css" />
-       
-    </head>
-    <body>
-        <header class="bg-success text-center text-white">
-            <span class="h2">API Dragon Ball</span>
-        </header>
- 
-        <section class="container-fluid text-center" id="app">
-            <div class="row">
-                <h2 class="col-12">Razas</h2>
- 
-                <div class="card col-2 p-3" v-for="personaje in razasFiltradas" :key="personaje.id">
-                    <img class="card-img-top" :src="personaje.image" :title="personaje.name"></img>
-                    <div>
-                        <h5>{{personaje.name}}</h5>
-                        <p>{{personaje.ki}}</p>
-                        <h5>{{personaje.race}}</h5>
-                        <a href="#" class="btn btn-primary" @click="mostrarDescripcion(personaje)">Ver detalles...</a>
-                    </div>
-                </div>
-            </div>
+<head>
+    <meta charset="UTF-8">
+    <title>AnimeChan API</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
 
-        <footer class="text-center text-white">
-            <div class="container d-flex justify-content-between">
-                <button class="btn filter-btn" @click="filtrarRaza('Saiyan')">Saiyajin</button>
-                <button class="btn filter-btn" @click="filtrarRaza('Namekian')">Namek</button>
-                <button class="btn filter-btn" @click="filtrarRaza('Human')">Humano</button>
-                <button class="btn filter-btn" @click="filtrarRaza('Android')">Android</button>
-                <button class="btn filter-btn" @click="filtrarRaza('Frieza Race')">Frieza race</button>
-                <button class="btn filter-btn" @click="filtrarRaza('Todos')">Todos</button>
-            </div>
+<header class="bg-success text-center text-white p-3">
+    <span class="h2">Frases de Anime</span>
+</header>
 
+<section class="container mt-4" id="app">
 
-        </footer>
-    </section>
- 
-        <script src="../js/vue3.js"></script>
-        <script src="..//js/axios.min.js"></script>
-        <script src="../js/funciones.js"></script>
-    </body>
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <input type="text"   class="form-control"   v-model="textoBusqueda"   placeholder="Escribe anime o personaje">
+        </div>
+
+        <div class="col-md-3">
+            <select class="form-control" v-model="tipoBusqueda">
+                <option value="anime">Anime</option>
+                <option value="character">Personaje</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-primary" @click="buscar">
+                Buscar
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card col-md-4 p-3 m-2 shadow" v-for="(frase, index) in frases" :key="index">
+
+            <h5>{{ frase.anime.name }}</h5>
+            <h6 class="text-muted">{{ frase.character.name }}</h6>
+            <p class="mt-2">"{{ frase.content }}"</p>
+        </div>
+    </div>
+
+</section>
+
+<script src="../js/vue3.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/funciones.js"></script>
+
+</body>
 </html>
